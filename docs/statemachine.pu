@@ -1,0 +1,11 @@
+@startuml
+[*] --> standby
+standby --> addr_recv : recv START
+wait_stop --> standby : recv STOP
+addr_recv --> send_mode : recv addr with W bit
+addr_recv --> recv_mode : recv addr with R bit
+send_mode --> send_mode : recv ACK
+send_mode --> wait_stop : recv NACK
+recv_mode --> recv_mode
+recv_mode --> wait_stop : recv NACK
+@enduml]
