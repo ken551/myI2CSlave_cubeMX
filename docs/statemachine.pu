@@ -2,8 +2,11 @@
 [*] --> standby
 standby --> addr_recv : recv START
 wait_stop --> standby : recv STOP
-addr_recv --> send_mode : recv addr with W bit
-addr_recv --> recv_mode : recv addr with R bit
+addr_recv --> regaddr_recv : recv 8bit addr
+addr_recv --> wait_stop : invalid addr
+regaddr_recv --> send_mode : recv addr/W and regaddr
+regaddr_recv --> recv_mode : recv addr/R and regaddr
+regaddr_recv --> wait_stop : invalid addr
 send_mode --> send_mode : recv ACK
 send_mode --> wait_stop : recv NACK
 recv_mode --> recv_mode
